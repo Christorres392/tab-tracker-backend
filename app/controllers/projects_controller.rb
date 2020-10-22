@@ -17,12 +17,16 @@ class ProjectsController < ApplicationController
     end
 
     def destroy
-        Project.find(params[:id]).destroy
+        puts params
+        puts "============"
+        Project.find_by(id: params[:id]).destroy
+        render json: "Deleted"
     end
 
     def update
         @project = Project.find(params[:id])
         @project.update(project_params)
+        render json: @project
     end
 
     private
