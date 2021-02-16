@@ -12,12 +12,15 @@
 
 ActiveRecord::Schema.define(version: 2020_10_07_210302) do
 
+  # These are extensions that must be enabled in order to support this database
+  enable_extension "plpgsql"
+
   create_table "issues", force: :cascade do |t|
     t.string "issue_name"
     t.string "priority"
     t.string "description"
     t.boolean "in_progress"
-    t.integer "project_id", null: false
+    t.bigint "project_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["project_id"], name: "index_issues_on_project_id"
@@ -25,7 +28,7 @@ ActiveRecord::Schema.define(version: 2020_10_07_210302) do
 
   create_table "projects", force: :cascade do |t|
     t.string "project_name"
-    t.integer "user_id", null: false
+    t.bigint "user_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["user_id"], name: "index_projects_on_user_id"
@@ -34,7 +37,7 @@ ActiveRecord::Schema.define(version: 2020_10_07_210302) do
   create_table "references", force: :cascade do |t|
     t.string "url"
     t.string "note"
-    t.integer "issue_id", null: false
+    t.bigint "issue_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["issue_id"], name: "index_references_on_issue_id"

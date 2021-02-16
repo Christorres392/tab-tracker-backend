@@ -23,6 +23,8 @@ class IssuesController < ApplicationController
     def update
         @issue = Issue.find(params[:id])
         @issue.update(issue_params)
+        @issue.save
+        render json: @issue
     end
     
     private
